@@ -16,7 +16,8 @@ public class SecuredConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/maniek").hasAnyRole("USER", "ADMIN");
+                .antMatchers("/maniek").hasAnyRole("USER", "ADMIN")
+                .and().csrf().disable();
 
     }
 

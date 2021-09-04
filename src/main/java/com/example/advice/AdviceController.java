@@ -3,7 +3,9 @@ package com.example.advice;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.util.List;
+import java.util.Scanner;
 
 @RestController
 @RequiredArgsConstructor
@@ -12,7 +14,7 @@ public class AdviceController {
 
     private final AdviceService adviceService;
 
-    @GetMapping("/all")
+    @GetMapping("")
     @ResponseBody
     public List<Advice> getAll(){
         return adviceService.getAll();
@@ -20,26 +22,29 @@ public class AdviceController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public Advice getAdvice(@PathVariable long id){
+    public Advice getAdvice(@PathVariable int id){
         return adviceService.findById(id);
     }
 
     @PostMapping("")
-    public String addAdvice(@RequestBody Advice advice){
+    public void addAdvice(@RequestBody Advice advice){
         adviceService.saveAdvice(advice);
-        return "Added";
     }
 
     @DeleteMapping("/{id}")
-    public String removeAdvice(@PathVariable long id){
+    public void removeAdvice(@PathVariable int id){
         adviceService.delete(id);
-        return "Removed";
     }
 
     @PutMapping("/{id}")
-    public String updateAdvice(@PathVariable long id){
+    public String updateAdvice(@PathVariable int id){
         Advice advice = adviceService.findById(id);
-        advice.setTitle("Updated Title");
+        File file = new File("/home/mariusz/Obrazy/Kamera/pic.jpg");
+        byte[] picArray = new byte[(int) file.length()];
+        Scanner scanner = new Scanner(System.in);
+        String title = scanner.nextLine();
+        advice.setTitle(title);
+        advice.setPicture(picArray);
         adviceService.update(advice);
         return "Updated";
     }

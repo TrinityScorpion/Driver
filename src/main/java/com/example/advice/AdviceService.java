@@ -13,25 +13,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdviceService {
 
-    private final AdviceRepository adviceRepository;
+    private final AdviceRepo adviceRepo;
 
     public void saveAdvice(Advice advice){
-        adviceRepository.saveAdvice(advice);
+        adviceRepo.save(advice);
     }
-    public Advice findById(long id){
-       return adviceRepository.findById(id);
+    public Advice findById(Integer id){
+       return adviceRepo.findById(id).orElse(null);
     }
 
     public List<Advice> getAll(){
-        return adviceRepository.getAllAdvices();
+        System.out.println(adviceRepo.findAll());
+        return adviceRepo.findAll();
+
     }
 
-    public void delete(long id){
-        adviceRepository.delete(id);
+    public void delete(Integer id){
+        Advice advice = findById(id);
+        adviceRepo.delete(advice);
     }
 
     public void update(Advice advice){
-        adviceRepository.update(advice);
+        adviceRepo.save(advice);
     }
 
 
