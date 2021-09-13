@@ -23,7 +23,7 @@ public class AdviceService {
     }
 
     public List<Advice> getAll(){
-        System.out.println(adviceRepo.findAll());
+        //System.out.println(adviceRepo.findAll());
         return adviceRepo.findAll();
 
     }

@@ -1,11 +1,9 @@
 package com.example.demo;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class RestApiTest {
 
     @GetMapping("/")
@@ -29,4 +27,9 @@ public class RestApiTest {
     }
 
 
+    @RequestMapping("hello")
+    public String helloWorld(@RequestParam(value="name", defaultValue="World") String name) {
+        return "Hello "+name+"!!";
+    }
+    
 }
